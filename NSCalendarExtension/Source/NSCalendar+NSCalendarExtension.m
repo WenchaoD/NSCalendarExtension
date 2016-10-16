@@ -131,20 +131,29 @@ NSDate * _Nullable __ns_dateWithEra_yearForWeekOfYear_weekOfYear_weekday_hour_mi
     return date;
 }
 
+/**
+ * - (nullable NSDate *)dateBySettingUnit:(NSCalendarUnit)unit value:(NSInteger)v ofDate:(NSDate *)date options:(NSCalendarOptions)opts;
+ */
+NSDate * _Nullable __ns_dateBySettingUnit_value_ofDate_options(id self, SEL _cmd, NSCalendarUnit unit, NSInteger v, NSDate *date, NSCalendarOptions options) {
+    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+    [components setValue:v forComponent:unit];
+    NSDate *result = [self dateFromComponents:components];
+    // Options
+    return result;
+}
 
 
 /**
- * - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate *)date;
+ * - (nullable NSDate *)dateBySettingHour:(NSInteger)h minute:(NSInteger)m second:(NSInteger)s ofDate:(NSDate *)date options:(NSCalendarOptions)opts;
  */
-NSInteger __ns_component_from_date(id self, SEL _cmd, NSCalendarUnit component, NSDate * date) {
-    __weak NSDictionary<NSNumber *, NSString *> *keyDictionary = __ns_get_lazy_key_dictionary();
-    NSString *key = keyDictionary[@(component)];
-    if (key.length) {
-        NSDateComponents *components = [self components:component fromDate:date];
-        id result = [components valueForKey:key];
-        return [result respondsToSelector:@selector(integerValue)] ? [result integerValue] : -1;
-    }
-    return -1;
+NSDate * _Nullable __ns_dateBySettingHour_minute_second_ofDate_options(id self, SEL _cmd, NSInteger hour, NSInteger minute, NSInteger second, NSDate *date, NSCalendarOptions options) {
+    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+    components.hour = hour;
+    components.minute = minute;
+    components.second = second;
+    NSDate *result = [self dateFromComponents:components];
+    // Options
+    return result;
 }
 
 /**
@@ -164,6 +173,20 @@ NSDate  * _Nullable __ns_dateByAddingUnit_value_toDate_options(id self, SEL _cmd
         return newDate;
     }
     return date.copy;
+}
+
+/**
+ * - (NSInteger)component:(NSCalendarUnit)component fromDate:(NSDate *)date;
+ */
+NSInteger __ns_component_from_date(id self, SEL _cmd, NSCalendarUnit component, NSDate * date) {
+    __weak NSDictionary<NSNumber *, NSString *> *keyDictionary = __ns_get_lazy_key_dictionary();
+    NSString *key = keyDictionary[@(component)];
+    if (key.length) {
+        NSDateComponents *components = [self components:component fromDate:date];
+        id result = [components valueForKey:key];
+        return [result respondsToSelector:@selector(integerValue)] ? [result integerValue] : -1;
+    }
+    return -1;
 }
 
 /**
@@ -267,6 +290,8 @@ NS_ASSUME_NONNULL_END
 {
     __ns_inject_function(object_getClass(self), @selector(calendarWithIdentifier:), __ns_calendarWithIdentifier);
     __ns_inject_function(self, @selector(component:fromDate:), __ns_component_from_date);
+    __ns_inject_function(self, @selector(dateBySettingUnit:value:ofDate:options:), __ns_dateBySettingUnit_value_ofDate_options);
+    __ns_inject_function(self, @selector(dateBySettingHour:minute:second:ofDate:options:), __ns_dateBySettingHour_minute_second_ofDate_options);
     __ns_inject_function(self, @selector(dateByAddingUnit:value:toDate:options:), __ns_dateByAddingUnit_value_toDate_options);
     __ns_inject_function(self, @selector(compareDate:toDate:toUnitGranularity:),__ns_compareDate_toDate_toUnitGranularity);
     __ns_inject_function(self, @selector(isDate:equalToDate:toUnitGranularity:), __ns_isDate_equalToDate_toUnitGranularity);
