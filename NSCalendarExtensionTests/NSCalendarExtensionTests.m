@@ -167,7 +167,6 @@
     }];
     
     
-    
     XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitSecond], NSOrderedAscending);
     XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitMinute], NSOrderedAscending);
     
@@ -242,9 +241,9 @@
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate *date1 = [formatter dateFromString:@"2016-10-10 10:10:10"];
     NSDate *date2 = [self.calendar dateWithEra:1 year:2016 month:10 day:10 hour:10 minute:10 second:10 nanosecond:0];
-    XCTAssertEqual(date1, date2);
+    XCTAssertEqualObjects(date1, date2);
     NSDate *date3 = [formatter dateFromString:@"2016-10-10 10:10:11"];
-    XCTAssertNotEqual(date3, date2);
+    XCTAssertNotEqualObjects(date3, date2);
 }
 
 - (void)test_NSDateComponents_valueForComponent

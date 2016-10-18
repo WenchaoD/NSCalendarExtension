@@ -135,7 +135,7 @@ NSDate * _Nullable __ns_dateWithEra_yearForWeekOfYear_weekOfYear_weekday_hour_mi
  * - (nullable NSDate *)dateBySettingUnit:(NSCalendarUnit)unit value:(NSInteger)v ofDate:(NSDate *)date options:(NSCalendarOptions)opts;
  */
 NSDate * _Nullable __ns_dateBySettingUnit_value_ofDate_options(id self, SEL _cmd, NSCalendarUnit unit, NSInteger v, NSDate *date, NSCalendarOptions options) {
-    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
     [components setValue:v forComponent:unit];
     NSDate *result = [self dateFromComponents:components];
     // Options
@@ -147,7 +147,7 @@ NSDate * _Nullable __ns_dateBySettingUnit_value_ofDate_options(id self, SEL _cmd
  * - (nullable NSDate *)dateBySettingHour:(NSInteger)h minute:(NSInteger)m second:(NSInteger)s ofDate:(NSDate *)date options:(NSCalendarOptions)opts;
  */
 NSDate * _Nullable __ns_dateBySettingHour_minute_second_ofDate_options(id self, SEL _cmd, NSInteger hour, NSInteger minute, NSInteger second, NSDate *date, NSCalendarOptions options) {
-    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
+    NSDateComponents *components = [self components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:date];
     components.hour = hour;
     components.minute = minute;
     components.second = second;
@@ -184,7 +184,8 @@ NSInteger __ns_component_from_date(id self, SEL _cmd, NSCalendarUnit component, 
     if (key.length) {
         NSDateComponents *components = [self components:component fromDate:date];
         id result = [components valueForKey:key];
-        return [result respondsToSelector:@selector(integerValue)] ? [result integerValue] : -1;
+        NSInteger value = [result respondsToSelector:@selector(integerValue)] ? [result integerValue] : -1;
+        return value;
     }
     return -1;
 }
@@ -249,11 +250,15 @@ NSComparisonResult __ns_compareDate_toDate_toUnitGranularity(id self, SEL _cmd, 
     NSArray<NSString *> *allLargerKeys;
     NSCalendarUnit allLargerUnits;
     __ns_get_larger_units_and_keys(self, _cmd, unit, &allLargerUnits, &allLargerKeys);
+    
     if (allLargerKeys.count) {
-        NSDateComponents *components = [self components:allLargerUnits fromDate:date1 toDate:date2 options:0];
+        NSDateComponents *c1 = [self components:allLargerUnits fromDate:date1];
+        NSDateComponents *c2 = [self components:allLargerUnits fromDate:date2];
         __block NSInteger result = NSNotFound;
         [allLargerKeys.reverseObjectEnumerator.allObjects enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSInteger i = [[components valueForKey:obj] integerValue];
+            NSInteger i1 = [[c1 valueForKey:obj] integerValue];
+            NSInteger i2 = [[c2 valueForKey:obj] integerValue];
+            NSInteger i = i2 - i1;
             if (i != 0) {
                 result = -i/ABS(i);
                 *stop = YES;
