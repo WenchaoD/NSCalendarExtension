@@ -375,4 +375,14 @@
 
 }
 
+- (void)testDateComparison
+{
+    NSDate *date1 = [self.calendar dateWithEra:1 year:2016 month:12 day:31 hour:0 minute:0 second:0 nanosecond:0];
+    NSDate *date2 = [self.calendar dateWithEra:1 year:2017 month:1 day:1 hour:0 minute:0 second:0 nanosecond:0];
+    XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitEra],NSOrderedSame);
+    XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitYear],NSOrderedAscending);
+    XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitMonth],NSOrderedAscending);
+    XCTAssertEqual([self.calendar compareDate:date1 toDate:date2 toUnitGranularity:NSCalendarUnitDay],NSOrderedAscending);   
+}
+
 @end

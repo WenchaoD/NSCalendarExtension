@@ -254,18 +254,8 @@ NSComparisonResult __ns_compareDate_toDate_toUnitGranularity(id self, SEL _cmd, 
     if (allLargerKeys.count) {
         NSDateComponents *c1 = [self components:allLargerUnits fromDate:date1];
         NSDateComponents *c2 = [self components:allLargerUnits fromDate:date2];
-        __block NSInteger result = NSNotFound;
-        [allLargerKeys.reverseObjectEnumerator.allObjects enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSInteger i1 = [[c1 valueForKey:obj] integerValue];
-            NSInteger i2 = [[c2 valueForKey:obj] integerValue];
-            NSInteger i = i2 - i1;
-            if (i != 0) {
-                result = -i/ABS(i);
-                *stop = YES;
-            }
-        }];
-        if (result == NSNotFound) result = 0;
-        return (NSComparisonResult)result;
+        date1 = [self dateFromComponents:c1];
+        date2 = [self dateFromComponents:c2];
     }
     return [date1 compare:date2]; // Bottom protection
 }
