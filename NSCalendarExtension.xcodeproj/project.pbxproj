@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		307004811E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 307004801E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.m */; };
 		3085BA6D1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3085BA6C1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m */; };
 		3085BA6E1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3085BA6C1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m */; };
 		30C35C351D8BD3AE002CFD2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C35C341D8BD3AE002CFD2E /* main.m */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3070047F1E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+NSCalendarExtension.h"; sourceTree = "<group>"; };
+		307004801E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+NSCalendarExtension.m"; sourceTree = "<group>"; };
 		3085BA6B1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+NSCalendarExtension.h"; sourceTree = "<group>"; };
 		3085BA6C1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+NSCalendarExtension.m"; sourceTree = "<group>"; };
 		30C35C301D8BD3AE002CFD2E /* NSCalendarExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NSCalendarExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,8 @@
 				30C35C5F1D8BD3E6002CFD2E /* NSString+NSCalendarExtension.h */,
 				30C35C601D8BD3E6002CFD2E /* NSString+NSCalendarExtension.m */,
 				30C35C5B1D8BD3E6002CFD2E /* NSCalendarExtensionControlCenter.h */,
+				3070047F1E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.h */,
+				307004801E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				30C35C3B1D8BD3AE002CFD2E /* ViewController.m in Sources */,
 				30C35C651D8BD3E6002CFD2E /* NSDateComponents+NSCalendarExtension.m in Sources */,
 				30C35C671D8BD3E6002CFD2E /* NSString+NSCalendarExtension.m in Sources */,
+				307004811E042AA9007CE3B9 /* NSTimer+NSCalendarExtension.m in Sources */,
 				30C35C381D8BD3AE002CFD2E /* AppDelegate.m in Sources */,
 				30C35C351D8BD3AE002CFD2E /* main.m in Sources */,
 				3085BA6D1D8BE6AE00FF3ED6 /* NSCalendar+NSCalendarExtension.m in Sources */,
