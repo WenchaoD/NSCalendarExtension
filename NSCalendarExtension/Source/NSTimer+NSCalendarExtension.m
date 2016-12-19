@@ -50,8 +50,8 @@ NS_ASSUME_NONNULL_END
 
 + (void)__ns_forceInjecting
 {
-    __ns_inject_function(object_getClass(self), @selector(timerWithTimeInterval:repeats:block:), __ns_timerWithTimeInterval_repeats_block);
-    __ns_inject_function(object_getClass(self), @selector(scheduledTimerWithTimeInterval:repeats:block:), __ns_scheduledTimerWithTimeInterval_repeats_block);
+    __ns_inject_function(object_getClass(self), NSSelectorFromString(@"timerWithTimeInterval:repeats:block:"), __ns_timerWithTimeInterval_repeats_block);
+    __ns_inject_function(object_getClass(self), NSSelectorFromString(@"scheduledTimerWithTimeInterval:repeats:block:"), __ns_scheduledTimerWithTimeInterval_repeats_block);
 }
 
 @end
